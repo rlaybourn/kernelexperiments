@@ -20,13 +20,7 @@ static char *HELLO_KEYS_NAME = "PB_KEY";
 static const int adxl345_uscale = 38300;
 
 
-/* interrupt handler */
-static irqreturn_t hello_keys_isr(int irq, void *data)
-{
-	struct device *dev = data;
-	dev_info(dev, "interrupt received. key: %s\n", HELLO_KEYS_NAME);
-	return IRQ_HANDLED;
-}
+
 
 struct ioexp_device {
 	struct i2c_client *client;
@@ -159,6 +153,16 @@ static int clearInterrupt(struct i2c_client *client)
 	}
 
 }
+
+/* interrupt handler */
+static irqreturn_t hello_keys_isr(int irq, void *data)
+{
+	struct ioexp_device *dev = data;
+	dev_info(dev->client, "interrupt received. key: %s\n", HELLO_KEYS_NAME);
+	clearInterrupt(dev->client);
+	return IRQ_HANDLED;
+}
+
 static int write_to_register(struct i2c_client *client,int addr,u8 value)
 {
 	int err;
@@ -363,13 +367,7 @@ static int ioexp_probe(struct i2c_client *client,
 	// dev_info(dev, "IRQ_using_platform_get_irq: %d\n", irq);
 
 
-	int ret_val = devm_request_threaded_irq(dev,irq,NULL,hello_keys_isr,
-								IRQF_TRIGGER_FALLING | IRQF_ONESHOT,
-								HELLO_KEYS_NAME,dev);
-	if (ret_val) {
-		dev_err(dev, "Failed to request interrupt %d, error %d\n", irq, ret_val);
-		return ret_val;
-	}
+
 	
 	//////////////////////////////////////////////////////////////////////////////////////
 	command_byte = 0x80 | 0x00; /* Write and update register with value 0xFF*/
@@ -411,7 +409,7 @@ static int ioexp_probe(struct i2c_client *client,
 	err = write_to_register(client,7,0x00);
 
 	//interrupt on every integration
-	err = write_to_register(client,PERSISTANCE_REG,0x00);
+	err = write_to_register(client,PERSISTANCE_REG,0x04);
 	//err = i2c_master_send(client, inbuf, 2); /* write DAC value */
 	if (err < 0) {
 		dev_err(&client->dev, "failed to set persistance");
@@ -433,6 +431,14 @@ static int ioexp_probe(struct i2c_client *client,
 		return err;
 
 	dev_info(&client->dev, "ioexp DAC registered\n");
+
+		int ret_val = devm_request_threaded_irq(dev,irq,NULL,hello_keys_isr,
+								IRQF_TRIGGER_FALLING | IRQF_ONESHOT,
+								HELLO_KEYS_NAME,data);
+	if (ret_val) {
+		dev_err(dev, "Failed to request interrupt %d, error %d\n", irq, ret_val);
+		return ret_val;
+	}
 
 	return 0;
 }
