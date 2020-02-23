@@ -1,0 +1,126 @@
+make -C /home/richard/linux \
+	ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- \
+	SUBDIRS=/home/richard/driverwork/i2c modules
+make[1]: Entering directory '/home/richard/linux'
+  CC [M]  /home/richard/driverwork/i2c/rgb_sensor_wsys.o
+/home/richard/driverwork/i2c/rgb_sensor_wsys.c: In function 'showData':
+/home/richard/driverwork/i2c/rgb_sensor_wsys.c:21:2: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+  char thereturn[5] = {'h','e','l','l','o'};
+  ^
+In file included from ./include/linux/thread_info.h:11:0,
+                 from ./include/asm-generic/preempt.h:4,
+                 from ./arch/arm/include/generated/asm/preempt.h:1,
+                 from ./include/linux/preempt.h:59,
+                 from ./include/linux/spinlock.h:50,
+                 from ./include/linux/seqlock.h:35,
+                 from ./include/linux/time.h:5,
+                 from ./include/linux/stat.h:18,
+                 from ./include/linux/module.h:10,
+                 from /home/richard/driverwork/i2c/rgb_sensor_wsys.c:2:
+/home/richard/driverwork/i2c/rgb_sensor_wsys.c: At top level:
+./include/linux/bug.h:37:45: error: negative width in bit-field '<anonymous>'
+ #define BUILD_BUG_ON_ZERO(e) (sizeof(struct { int:-!!(e); }))
+                                             ^
+./include/linux/kernel.h:854:3: note: in expansion of macro 'BUILD_BUG_ON_ZERO'
+   BUILD_BUG_ON_ZERO((perms) & 2) +     \
+   ^
+./include/linux/sysfs.h:102:12: note: in expansion of macro 'VERIFY_OCTAL_PERMISSIONS'
+    .mode = VERIFY_OCTAL_PERMISSIONS(_mode) },  \
+            ^
+./include/linux/device.h:578:45: note: in expansion of macro '__ATTR'
+  struct device_attribute dev_attr_##_name = __ATTR(_name, _mode, _show, _store)
+                                             ^
+/home/richard/driverwork/i2c/rgb_sensor_wsys.c:32:8: note: in expansion of macro 'DEVICE_ATTR'
+ static DEVICE_ATTR(file1,S_IWUGO,showData,getData);
+        ^
+./include/linux/bug.h:37:45: warning: initialization from incompatible pointer type [enabled by default]
+ #define BUILD_BUG_ON_ZERO(e) (sizeof(struct { int:-!!(e); }))
+                                             ^
+./include/linux/kernel.h:854:3: note: in expansion of macro 'BUILD_BUG_ON_ZERO'
+   BUILD_BUG_ON_ZERO((perms) & 2) +     \
+   ^
+./include/linux/sysfs.h:102:12: note: in expansion of macro 'VERIFY_OCTAL_PERMISSIONS'
+    .mode = VERIFY_OCTAL_PERMISSIONS(_mode) },  \
+            ^
+./include/linux/device.h:578:45: note: in expansion of macro '__ATTR'
+  struct device_attribute dev_attr_##_name = __ATTR(_name, _mode, _show, _store)
+                                             ^
+/home/richard/driverwork/i2c/rgb_sensor_wsys.c:32:8: note: in expansion of macro 'DEVICE_ATTR'
+ static DEVICE_ATTR(file1,S_IWUGO,showData,getData);
+        ^
+./include/linux/bug.h:37:45: warning: (near initialization for 'dev_attr_file1.store') [enabled by default]
+ #define BUILD_BUG_ON_ZERO(e) (sizeof(struct { int:-!!(e); }))
+                                             ^
+./include/linux/kernel.h:854:3: note: in expansion of macro 'BUILD_BUG_ON_ZERO'
+   BUILD_BUG_ON_ZERO((perms) & 2) +     \
+   ^
+./include/linux/sysfs.h:102:12: note: in expansion of macro 'VERIFY_OCTAL_PERMISSIONS'
+    .mode = VERIFY_OCTAL_PERMISSIONS(_mode) },  \
+            ^
+./include/linux/device.h:578:45: note: in expansion of macro '__ATTR'
+  struct device_attribute dev_attr_##_name = __ATTR(_name, _mode, _show, _store)
+                                             ^
+/home/richard/driverwork/i2c/rgb_sensor_wsys.c:32:8: note: in expansion of macro 'DEVICE_ATTR'
+ static DEVICE_ATTR(file1,S_IWUGO,showData,getData);
+        ^
+./include/linux/bug.h:37:45: error: negative width in bit-field '<anonymous>'
+ #define BUILD_BUG_ON_ZERO(e) (sizeof(struct { int:-!!(e); }))
+                                             ^
+./include/linux/kernel.h:854:3: note: in expansion of macro 'BUILD_BUG_ON_ZERO'
+   BUILD_BUG_ON_ZERO((perms) & 2) +     \
+   ^
+./include/linux/sysfs.h:102:12: note: in expansion of macro 'VERIFY_OCTAL_PERMISSIONS'
+    .mode = VERIFY_OCTAL_PERMISSIONS(_mode) },  \
+            ^
+./include/linux/device.h:578:45: note: in expansion of macro '__ATTR'
+  struct device_attribute dev_attr_##_name = __ATTR(_name, _mode, _show, _store)
+                                             ^
+/home/richard/driverwork/i2c/rgb_sensor_wsys.c:33:8: note: in expansion of macro 'DEVICE_ATTR'
+ static DEVICE_ATTR(file2,S_IWUGO,showData,getData);
+        ^
+./include/linux/bug.h:37:45: warning: initialization from incompatible pointer type [enabled by default]
+ #define BUILD_BUG_ON_ZERO(e) (sizeof(struct { int:-!!(e); }))
+                                             ^
+./include/linux/kernel.h:854:3: note: in expansion of macro 'BUILD_BUG_ON_ZERO'
+   BUILD_BUG_ON_ZERO((perms) & 2) +     \
+   ^
+./include/linux/sysfs.h:102:12: note: in expansion of macro 'VERIFY_OCTAL_PERMISSIONS'
+    .mode = VERIFY_OCTAL_PERMISSIONS(_mode) },  \
+            ^
+./include/linux/device.h:578:45: note: in expansion of macro '__ATTR'
+  struct device_attribute dev_attr_##_name = __ATTR(_name, _mode, _show, _store)
+                                             ^
+/home/richard/driverwork/i2c/rgb_sensor_wsys.c:33:8: note: in expansion of macro 'DEVICE_ATTR'
+ static DEVICE_ATTR(file2,S_IWUGO,showData,getData);
+        ^
+./include/linux/bug.h:37:45: warning: (near initialization for 'dev_attr_file2.store') [enabled by default]
+ #define BUILD_BUG_ON_ZERO(e) (sizeof(struct { int:-!!(e); }))
+                                             ^
+./include/linux/kernel.h:854:3: note: in expansion of macro 'BUILD_BUG_ON_ZERO'
+   BUILD_BUG_ON_ZERO((perms) & 2) +     \
+   ^
+./include/linux/sysfs.h:102:12: note: in expansion of macro 'VERIFY_OCTAL_PERMISSIONS'
+    .mode = VERIFY_OCTAL_PERMISSIONS(_mode) },  \
+            ^
+./include/linux/device.h:578:45: note: in expansion of macro '__ATTR'
+  struct device_attribute dev_attr_##_name = __ATTR(_name, _mode, _show, _store)
+                                             ^
+/home/richard/driverwork/i2c/rgb_sensor_wsys.c:33:8: note: in expansion of macro 'DEVICE_ATTR'
+ static DEVICE_ATTR(file2,S_IWUGO,showData,getData);
+        ^
+/home/richard/driverwork/i2c/rgb_sensor_wsys.c: In function 'ioexp_read_file':
+/home/richard/driverwork/i2c/rgb_sensor_wsys.c:55:14: warning: unused variable 'size' [-Wunused-variable]
+  int expval, size;
+              ^
+/home/richard/driverwork/i2c/rgb_sensor_wsys.c: At top level:
+/home/richard/driverwork/i2c/rgb_sensor_wsys.c:46:38: warning: 'dev_attr_groups' defined but not used [-Wunused-variable]
+ static const struct attribute_group *dev_attr_groups[] = {
+                                      ^
+/home/richard/driverwork/i2c/rgb_sensor_wsys.c: In function 'ioexp_probe':
+/home/richard/driverwork/i2c/rgb_sensor_wsys.c:196:20: warning: ignoring return value of 'sysfs_create_group', declared with attribute warn_unused_result [-Wunused-result]
+  sysfs_create_group(&client->dev.kobj,&dev_attr_group);
+                    ^
+make[2]: *** [scripts/Makefile.build:300: /home/richard/driverwork/i2c/rgb_sensor_wsys.o] Error 1
+make[1]: *** [Makefile:1497: _module_/home/richard/driverwork/i2c] Error 2
+make[1]: Leaving directory '/home/richard/linux'
+make: *** [Makefile:9: all] Error 2
