@@ -25,6 +25,8 @@ static const int adxl345_uscale = 38300;
 struct ioexp_device {
 	struct i2c_client *client;
 	char name[8];
+	int values[4];
+
 };
 
 static const struct iio_chan_spec ioexp_channel[] = {
@@ -157,8 +159,16 @@ static int clearInterrupt(struct i2c_client *client)
 /* interrupt handler */
 static irqreturn_t hello_keys_isr(int irq, void *data)
 {
+	int i,chan;
+	u16 regval;
 	struct ioexp_device *dev = data;
 	dev_info(dev->client, "interrupt received. key: %s\n", HELLO_KEYS_NAME);
+	for(i =0; i < 4; i++)
+	{
+		chan = channel_to_reg(i);;
+		regval = read_value_16(dev->client,chan);
+		dev.values[i] = sign_extend32(le16_to_cpu(regval), 31);
+	}
 	clearInterrupt(dev->client);
 	return IRQ_HANDLED;
 }
@@ -440,6 +450,8 @@ static int ioexp_probe(struct i2c_client *client,
 		return ret_val;
 	}
 
+	//clear any current interrupt status
+	clearInterrupt(client);
 	return 0;
 }
 
