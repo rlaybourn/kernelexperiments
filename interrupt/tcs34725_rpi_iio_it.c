@@ -98,6 +98,15 @@ static const struct iio_chan_spec ioexp_channel[] = {
 
 };
 
+static int channel_to_reg(int channel)
+{
+	int chan;
+	chan = channel;
+	chan = chan * 2;
+	chan = chan + 0x14;
+	return chan;
+}
+
 static u16 read_value_16(struct i2c_client *client,int addr)
 {
 	u8 outbuf[3];
@@ -167,7 +176,7 @@ static irqreturn_t hello_keys_isr(int irq, void *data)
 	{
 		chan = channel_to_reg(i);;
 		regval = read_value_16(dev->client,chan);
-		dev.values[i] = sign_extend32(le16_to_cpu(regval), 31);
+		dev->values[i] = sign_extend32(le16_to_cpu(regval), 31);
 	}
 	clearInterrupt(dev->client);
 	return IRQ_HANDLED;
@@ -189,14 +198,7 @@ static int write_to_register(struct i2c_client *client,int addr,u8 value)
 	return err;
 }
 
-static int channel_to_reg(int channel)
-{
-	int chan;
-	chan = channel;
-	chan = chan * 2;
-	chan = chan + 0x14;
-	return chan;
-}
+
 
 static int ioexp_set_value(struct iio_dev *indio_dev, int val, int channel)
 {
