@@ -250,7 +250,8 @@ static int ioexp_read_raw(struct iio_dev *indio_dev,
 		 * and ADXL345_REG_DATA(X0/Y0/Z0) + 1 the most significant byte
 		 * we are reading 2 bytes and storing in a __le16
 		 */
-		regval = read_value_16(data->client,chan);
+		//regval = read_value_16(data->client,chan);
+		regval = data->values[channel->channel];
 		*val = sign_extend32(le16_to_cpu(regval), 31);
 		pr_info("returned value %d\n",val);
 		return IIO_VAL_INT;
